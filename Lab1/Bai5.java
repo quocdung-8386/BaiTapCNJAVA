@@ -11,7 +11,7 @@ public class Bai5 {
 
         int a = 0, b = 1;
 
-        System.out.print("Day Fibonacci: ");
+        System.out.println("Day Fibonacci: ");
 
         for (int i = 0; i < n; i++) {
             System.out.print(a + " ");
