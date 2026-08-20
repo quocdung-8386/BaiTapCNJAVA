@@ -2,6 +2,7 @@
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -12,11 +13,10 @@ import javax.swing.table.DefaultTableModel;
  * @author Quoc Dung
  */
 public class Bai8Lab3 extends javax.swing.JFrame {
-    
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Bai8Lab3.class.getName());
-private ArrayList<SinhVien> danhSach = new ArrayList<>();
-private DefaultTableModel model;
+    private ArrayList<SinhVien> danhSach = new ArrayList<>();
+    private DefaultTableModel model;
 
     /**
      * Creates new form Bai8JTable
@@ -25,23 +25,25 @@ private DefaultTableModel model;
         initComponents();
         model = (DefaultTableModel) jtbSV.getModel();
         model.setColumnIdentifiers(
-        new String[]{
-        "Mã SV", "Họ tên", "Điểm"});
-        
+                new String[]{
+                    "Mã SV", "Họ tên", "Điểm"});
+
     }
-private void hienThiDanhSach() {
 
-    model.setRowCount(0);
+    private void hienThiDanhSach() {
 
-    for (SinhVien sv : danhSach) {
+        model.setRowCount(0);
 
-        model.addRow(new Object[]{
-            sv.getMaSV(),
-            sv.getTenSV(),
-            sv.getdiem()
-        });
+        for (SinhVien sv : danhSach) {
+
+            model.addRow(new Object[]{
+                sv.getMaSV(),
+                sv.getTenSV(),
+                sv.getdiem()
+            });
+        }
     }
-}
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -192,183 +194,185 @@ private void hienThiDanhSach() {
     }//GEN-LAST:event_txtMaSVActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        
-    int row = jtbSV.getSelectedRow();
 
-    if (row == -1) {
+        int row = jtbSV.getSelectedRow();
 
-        JOptionPane.showMessageDialog(
-            this,
-            "Vui lòng chọn sinh viên cần sửa!"
-        );
-
-        return;
-    }
-
-    try {
-
-        String maSV = txtMaSV.getText().trim();
-        String hoTen = txtTenSV.getText().trim();
-        double diem = Double.parseDouble(txtDiem.getText());
-
-        if (hoTen.isEmpty()) {
+        if (row == -1) {
 
             JOptionPane.showMessageDialog(
-                this,
-                "Vui lòng nhập họ tên!"
+                    this,
+                    "Vui lòng chọn sinh viên cần sửa!"
             );
 
             return;
         }
 
-        if (diem < 0 || diem > 10) {
+        try {
 
-            JOptionPane.showMessageDialog(
-                this,
-                "Điểm phải từ 0 đến 10!"
-            );
+            String maSV = txtMaSV.getText().trim();
+            String hoTen = txtTenSV.getText().trim();
+            double diem = Double.parseDouble(txtDiem.getText());
 
-            return;
-        }
-
-        SinhVien sv = danhSach.get(row);
-
-        sv.setMaSV(maSV);
-        sv.setTenSV(hoTen);
-        sv.setdiem(diem);
-
-        hienThiDanhSach();
-
-        JOptionPane.showMessageDialog(
-            this,
-            "Sửa thành công!"
-        );
-
-    } catch (NumberFormatException e) {
-
-        JOptionPane.showMessageDialog(
-            this,
-            "Điểm phải là số!"
-        );
-    }// TODO add your handling code here:
-    }//GEN-LAST:event_btnSuaActionPerformed
-
-    private void btnLMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLMActionPerformed
-xoaTrang();        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLMActionPerformed
-
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-           try {
-
-        String maSV = txtMaSV.getText().trim();
-        String hoTen = txtTenSV.getText().trim();
-        double diem = Double.parseDouble(txtDiem.getText());
-
-        if (maSV.isEmpty() || hoTen.isEmpty()) {
-            JOptionPane.showMessageDialog(
-                this,
-                "Vui lòng nhập đầy đủ thông tin!"
-            );
-            return;
-        }
-
-        if (diem < 0 || diem > 10) {
-            JOptionPane.showMessageDialog(
-                this,
-                "Điểm phải từ 0 đến 10!"
-            );
-            return;
-        }
-
-        // Kiểm tra mã sinh viên trùng
-        for (SinhVien sv : danhSach) {
-
-            if (sv.getMaSV().equalsIgnoreCase(maSV)) {
+            if (hoTen.isEmpty()) {
 
                 JOptionPane.showMessageDialog(
-                    this,
-                    "Mã sinh viên đã tồn tại!"
+                        this,
+                        "Vui lòng nhập họ tên!"
                 );
 
                 return;
             }
-        }
 
-        SinhVien sv = new SinhVien(maSV, hoTen, diem);
+            if (diem < 0 || diem > 10) {
 
-        danhSach.add(sv);
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Điểm phải từ 0 đến 10!"
+                );
 
-        hienThiDanhSach();
+                return;
+            }
 
-        xoaTrang();
+            SinhVien sv = danhSach.get(row);
 
-        JOptionPane.showMessageDialog(
-            this,
-            "Thêm sinh viên thành công!"
-        );
+            sv.setMaSV(maSV);
+            sv.setTenSV(hoTen);
+            sv.setdiem(diem);
 
-    } catch (NumberFormatException e) {
+            hienThiDanhSach();
 
-        JOptionPane.showMessageDialog(
-            this,
-            "Điểm phải là số!"
-        );
-    } // TODO add your handling code here:
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Sửa thành công!"
+            );
+
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Điểm phải là số!"
+            );
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnLMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLMActionPerformed
+        xoaTrang();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLMActionPerformed
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        try {
+
+            String maSV = txtMaSV.getText().trim();
+            String hoTen = txtTenSV.getText().trim();
+            double diem = Double.parseDouble(txtDiem.getText());
+
+            if (maSV.isEmpty() || hoTen.isEmpty()) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Vui lòng nhập đầy đủ thông tin!"
+                );
+                return;
+            }
+
+            if (diem < 0 || diem > 10) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Điểm phải từ 0 đến 10!"
+                );
+                return;
+            }
+
+            // Kiểm tra mã sinh viên trùng
+            for (SinhVien sv : danhSach) {
+
+                if (sv.getMaSV().equalsIgnoreCase(maSV)) {
+
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "Mã sinh viên đã tồn tại!"
+                    );
+
+                    return;
+                }
+            }
+
+            SinhVien sv = new SinhVien(maSV, hoTen, diem);
+
+            danhSach.add(sv);
+
+            hienThiDanhSach();
+
+            xoaTrang();
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Thêm sinh viên thành công!"
+            );
+
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Điểm phải là số!"
+            );
+        } // TODO add your handling code here:
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-          int row = jtbSV.getSelectedRow();
+        int row = jtbSV.getSelectedRow();
 
-    if (row == -1) {
+        if (row == -1) {
 
-        JOptionPane.showMessageDialog(
-            this,
-            "Vui lòng chọn sinh viên cần xóa!"
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Vui lòng chọn sinh viên cần xóa!"
+            );
+
+            return;
+        }
+
+        int result = JOptionPane.showConfirmDialog(
+                this,
+                "Bạn có chắc muốn xóa sinh viên này?",
+                "Xác nhận",
+                JOptionPane.YES_NO_OPTION
         );
 
-        return;
-    }
+        if (result == JOptionPane.YES_OPTION) {
 
-    int result = JOptionPane.showConfirmDialog(
-        this,
-        "Bạn có chắc muốn xóa sinh viên này?",
-        "Xác nhận",
-        JOptionPane.YES_NO_OPTION
-    );
+            danhSach.remove(row);
 
-    if (result == JOptionPane.YES_OPTION) {
+            hienThiDanhSach();
 
-        danhSach.remove(row);
+            xoaTrang();
 
-        hienThiDanhSach();
-
-        xoaTrang();
-
-        JOptionPane.showMessageDialog(
-            this,
-            "Xóa thành công!"
-        );
-    }  // TODO add your handling code here:
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Xóa thành công!"
+            );
+        }  // TODO add your handling code here:
     }//GEN-LAST:event_btnXoaActionPerformed
-private void tblSinhVienMouseClicked(java.awt.event.MouseEvent evt) {
+    private void tblSinhVienMouseClicked(java.awt.event.MouseEvent evt) {
 
-    int row = jtbSV.getSelectedRow();
+        int row = jtbSV.getSelectedRow();
 
-    if (row >= 0) {
+        if (row >= 0) {
 
-        txtMaSV.setText(model.getValueAt(row, 0).toString());
-        txtTenSV.setText(model.getValueAt(row, 1).toString());
-        txtDiem.setText(model.getValueAt(row, 2).toString());
+            txtMaSV.setText(model.getValueAt(row, 0).toString());
+            txtTenSV.setText(model.getValueAt(row, 1).toString());
+            txtDiem.setText(model.getValueAt(row, 2).toString());
+        }
     }
-}
-private void xoaTrang() {
 
-    txtMaSV.setText("");
-    txtTenSV.setText("");
-    txtDiem.setText("");
+    private void xoaTrang() {
 
-   jtbSV.clearSelection();
-}
+        txtMaSV.setText("");
+        txtTenSV.setText("");
+        txtDiem.setText("");
+
+        jtbSV.clearSelection();
+    }
+
     /**
      * @param args the command line arguments
      */

@@ -113,19 +113,19 @@ public class Bai4Lab3 extends javax.swing.JFrame {
         double b = Double.parseDouble(txtB.getText().trim());
         double c = Double.parseDouble(txtC.getText().trim());
 
-        // Kiểm tra cạnh hợp lệ
+     
         if (a <= 0 || b <= 0 || c <= 0) {
             txtKQ.setText("Các cạnh phải lớn hơn 0!");
             return;
         }
 
-        // Kiểm tra điều kiện tạo thành tam giác
+      
         if (a + b <= c || a + c <= b || b + c <= a) {
             txtKQ.setText("Không phải tam giác!");
             return;
         }
 
-        // Phân loại tam giác
+
         if (a == b && b == c) {
             txtKQ.setText("Tam giác đều");
         } 
